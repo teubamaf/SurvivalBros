@@ -14,10 +14,10 @@ script = ExtResource("1_hwt3k")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_c2qf2")
+script = ExtResource("4_g6qgq")
 
 [node name="Hand" type="Node2D" parent="Sprite2D"]
 position = Vector2(-9, 2)
-script = ExtResource("4_g6qgq")
 
 [node name="HandSprite" type="Sprite2D" parent="Sprite2D/Hand"]
 texture = ExtResource("3_homkv")
