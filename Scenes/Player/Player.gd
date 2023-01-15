@@ -2,6 +2,13 @@ extends CharacterBody2D
 
 @export var speed = 200
 
+var hand
+
+var playerpos
+var angle
+
+func _ready():
+	hand = get_node("Sprite2D/Hand")
 
 func get_input():
 	var input = Vector2()
@@ -19,3 +26,4 @@ func _physics_process(delta):
 	var direction = get_input()
 	velocity = direction * speed
 	move_and_slide()
+	playerpos = get_position()
