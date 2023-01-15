@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8dqk1o3m8smg"]
+
+[ext_resource type="Texture2D" uid="uid://rf2j04y4h6ge" path="res://Sprites/Weapon/axe_1.png" id="1_7w8jp"]
+[ext_resource type="Script" path="res://Scenes/Item/axe.gd" id="1_lma3w"]
+[ext_resource type="Script" path="res://Script/MyHitbox.gd" id="2_6gaya"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_arxso"]
+radius = 5.0
+height = 14.0
+
+[sub_resource type="Animation" id="Animation_w1di2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0140588]
+}
+
+[sub_resource type="Animation" id="Animation_iecei"]
+resource_name = "slash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.0140588, -2.50089]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sky37"]
+_data = {
+"RESET": SubResource("Animation_w1di2"),
+"slash": SubResource("Animation_iecei")
+}
+
+[node name="Axe" type="Node2D"]
+rotation = -0.0140588
+script = ExtResource("1_lma3w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_7w8jp")
+
+[node name="MyHitbox" type="Area2D" parent="Sprite2D"]
+script = ExtResource("2_6gaya")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/MyHitbox"]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_arxso")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sky37")
+}
