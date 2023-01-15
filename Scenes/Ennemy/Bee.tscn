@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://qose80xcygkp"]
+
+[ext_resource type="Texture2D" uid="uid://ci4uixgr3oy0r" path="res://Sprites/Monster/monster_29.png" id="1_1ucr2"]
+[ext_resource type="Script" path="res://Scenes/Ennemy/Bee.gd" id="1_c7m0m"]
+[ext_resource type="Script" path="res://Script/MyHurtbox.gd" id="3_wxypn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4w6ed"]
+
+[sub_resource type="Animation" id="Animation_i2sjw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4frid"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.139545, 0.200438, -0.00653125]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1h10p"]
+_data = {
+"RESET": SubResource("Animation_i2sjw"),
+"hit": SubResource("Animation_4frid")
+}
+
+[node name="Bee" type="Node2D"]
+script = ExtResource("1_c7m0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_1ucr2")
+
+[node name="MyHurtbox" type="Area2D" parent="Sprite2D"]
+script = ExtResource("3_wxypn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/MyHurtbox"]
+shape = SubResource("CircleShape2D_4w6ed")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1h10p")
+}
